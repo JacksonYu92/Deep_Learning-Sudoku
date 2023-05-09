@@ -50,27 +50,6 @@ GPU: Tesla V100-PCIE-16GB
 
 [Return to top](#Final-Project:-Applied-Deep-Learning)
 
-Let's create a summary table with for each model.
-
-| Model | #_of_layers | #_of_Conv2D | Strides | # of kernels for each Conv2D | # of Dense | MaxPooling2D | Dropout | Batch_size | 	Epochs | Training accuracy | Validation accuracy | Overfit / Underfit | 
-|---:| :-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| cnn_model1 | 10 | 3 | None | 64, 64, 128 | 1 | None | None | 32 | 5 | 0.8483 | 0.8358 | Overfit | 
-| cnn_model2 | 9 | 1 | None | 64 | 3 | None | 0.2 | 32 | 100 | 0.2503 | 0.2627 | Underfit | 
-| cnn_model3 | 11 | 3 | None | 64, 64, 128 | 1 | (3,3) | None | 64 | 30 | 0.7771 | 0.7735 | Underfit |
-| cnn_model4 | 11 | 3 | (3,3) | 64, 64, 128 | 1 | None | 0.1 | 32 | 100 | 0.3226 | 0.3510 | Underfit | 
-| cnn_model5 | 17 | 6 | None | 64, 64, 128, 256, 512, 1024 | 1 | None | 0.1 | 64 | 8 | 0.9223 | 0.9312 | Overfit after 5 epochs | 
-| cnn_model6 | 18 | 6 | (3,3) | 32, 64, 128, 256, 512, 1024 | 2 | None | 0.1 | 64 | 100 | 0.4133 | 0.4410 | Underfit | 
-| cnn_model7 | 18 | 6 | (2,2) | 32, 64, 128, 256, 512, 1024 | 2 | None | 0.1 | 64 | 100 | 0.3838 | 0.3855 | underfit | 
-| cnn_model8 | 17 | 6 | None | 512, 512, 512, 512, 512, 512 | 1 | None | 0.1 | 64 | 5 | 0.9043 | 0.9410 |  | 
-| cnn_model9 | 17 | 6 | (3,3) | 512, 512, 512, 512, 512, 512 | 1 | None | 0.1 | 64 | 200 | 0.5950 | 0.7656 | Underfit | 
-| cnn_model10 | 41 | 18 | (3,3) | 512 | 1 | None | 0.2 | 64 | 100 | Incomplete | Incomplete | Incomplete | 
-| <strong>cnn_model_11</strong> | 23 | 9 | None | 512 | 1 | None | 0.1 | 64 | 5 | <strong>0.9540<strong> | <strong>0.9827</strong> | <Strong>Best</Strong> | 								
-| rnn_model1 | 7 | None | None | None | 1 | None | None | 64 | 50 | 0.4345 | 0.4351	 | Underfit |
-| rnn_model2 | 8 | 1 | None | 64 | 1 | None | None | 64 | 60 | 0.5354 | 0.5347 | Underfit |
-| lstm_model1 | 11 | 1 | None | 64 | 1 | None | 0.2 | 64 | 50 | 0.4562 | 0.5099 | Overfit | 
-
-Building a sudoku with RNN or LSTM is complex. The models that we tried are too simple and the results are not desirable.
-
 The convolution neural networks (CNN) is good at extracting features. An increase in the number of epochs, number of layers, and number of neurons per layer can help improve the accuracy of the model. In this project, we start with a simple CNN model with 3 conv2D layers. The model is overfitting. So we have tried adding a dropout layer or using maxpooling to prevent overfitting. Adding strides of (3x3) could be good considering valid sudoku must follow each of the nine 3X3 sub-squares and should contain 1-9 digits without repetition. However, models that have strides require longer training hours with more epochs.  
 
 After testing all of the models, the **cnn_model_11** has the best performance in solving sudoku games with a training accuracy of 0.9540 and validation accuracy of 0.9827. 
@@ -516,10 +495,6 @@ Let's normalize the confusion matrix to have a better idea of how it performs.
 ```python
 norm_cm = np.round(cm/cm.astype(np.float).sum(axis=1), 4)
 ```
-
-    C:\Users\DSMLAzure\AppData\Local\Temp\2\ipykernel_4852\2432549872.py:1: DeprecationWarning: `np.float` is a deprecated alias for the builtin `float`. To silence this warning, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
-    Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
-      norm_cm = np.round(cm/cm.astype(np.float).sum(axis=1), 4)
     
 
 
@@ -556,19 +531,8 @@ df.da.export_metrics()
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
+    
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
